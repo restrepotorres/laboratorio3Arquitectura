@@ -14,7 +14,7 @@ public class FlightService {
     @Autowired
     private IFlightDAO dao;
 
-    public Flight savbe(Flight f){return dao.save(f);}
+    public Flight save(Flight f){return dao.save(f);}
     public String delte(long id) {dao.deleteById(id); return "vuelo borrado";}
     public Iterable<Flight> list() {return dao.findAll();}
     public Optional<Flight> listId(long id) { return dao.findById(id);}

@@ -29,10 +29,10 @@ public class FlightController {
     @PostMapping("/save")
     public long save(
         @Parameter(description  = "objeto vuelo que se guarda en la base de datos", required = true)
-        @RequestBody Flight flight) {
-        if(flight.getRating()>5) throw new InvalidRating("id debe ser menor o igual a 5");
+        @RequestBody Flight flight) throws InvalidRating {
+        if(flight.getRating()>5)throw new InvalidRating("id debe ser menor o igual a 5");
 
-        flightService.savbe(flight);
+        flightService.save(flight);
         return flight.getIdFlight();
     }
 
