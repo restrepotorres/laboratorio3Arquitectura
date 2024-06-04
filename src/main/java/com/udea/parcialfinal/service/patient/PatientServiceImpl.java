@@ -3,6 +3,7 @@ package com.udea.parcialfinal.service.patient;
 import com.udea.parcialfinal.domain.model.Patient;
 import com.udea.parcialfinal.persistance.repository.IPatientRepository;
 import com.udea.parcialfinal.utils.exception.BusinessException;
+import com.udea.parcialfinal.utils.exception.DataDuplicatedException;
 import com.udea.parcialfinal.utils.exception.DataNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -75,7 +76,7 @@ public class PatientServiceImpl implements IPatientService {
             Optional<Patient> optionalPatient = patientRepository.findByIdentificationNumber(patient.getIdentificationNumber());
             if (optionalPatient.isPresent()) {
                 // Patient already exists, return a 409 Conflict response
-                return ResponseEntity.status(HttpStatus.CONFLICT).build();
+                throw new DataDuplicatedException("Patient with identification " + patient.getIdentificationNumber() + " already exists.");
             } else {
                 // Save the new patient
                 Patient savedPatient = patientRepository.save(patient);
