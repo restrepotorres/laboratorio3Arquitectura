@@ -93,8 +93,12 @@ public class Patient {
      * The doctor assigned to the Patient.
      * This establishes a many-to-one relationship with the Doctor entity.
      */
+
+    @Column (name = "doctor_id")
+    private int idDoctor;
+
     @ManyToOne
-    @JoinColumn(name = "doctor_id", nullable = false)
+    @JoinColumn(name = "doctor_id", insertable = false, updatable = false)
     private Doctor doctor;
 }
 
