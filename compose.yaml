@@ -1,0 +1,23 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: parcialfinal
+    ports:
+      - "3306:3306"
+#    volumes:
+#      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  springboot:
+    build: .
+    container_name: springboot-container
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/parcialfinal
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    ports:
+      - "8089:8089"
+    depends_on:
+      - db
