@@ -57,7 +57,7 @@ public class PatientController {
             @ApiResponse(responseCode = "500", description = "Internal server error", content = {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = RuntimeException.class)) })
     })
-    @GetMapping("/get-patient-by-identification/{patientIdentificationNumber}")
+    @GetMapping(value= "/get-patient-by-identification/{patientIdentificationNumber}", produces = "application/vnd.patient.v1+json")
     public ResponseEntity<Patient> getBoardingPass (
             @Parameter(description = "The identification number of the patient to retrieve", example = "123")
             @PathVariable String patientIdentificationNumber
