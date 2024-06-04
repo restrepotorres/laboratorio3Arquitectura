@@ -46,14 +46,6 @@ public class Patient {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    /**
-     * The Patient's identification.
-     * This field is mandatory.
-     */
-    @NotNull
-    @Size(min = 1, max = 20)
-    @Column(name = "identification_type", nullable = false)
-    private String identificationType;
 
     /**
      * The identification number of the Patient.
@@ -65,21 +57,6 @@ public class Patient {
     @Column(name = "identification_number", nullable = false, unique = true)
     private String identificationNumber;
 
-    /**
-     * The phone number of the Patient.
-     */
-    @Pattern(regexp = "^[^';]*$", message = "Invalid characters in phone number")
-    @Column(name = "phone_number")
-    private String phoneNumber;
-
-    /**
-     * The email address of the Patient.
-     * This field is mandatory and must be unique.
-     */
-    @NotNull
-    @Email
-    @Column(name = "mail", nullable = false, unique = true)
-    private String mail;
 
     /**
      * The registration date of the Patient.
@@ -88,6 +65,68 @@ public class Patient {
     @NotNull
     @Column(name = "registration_date", nullable = false)
     private Timestamp registrationDate;
+
+    /**
+     * The weight of the Patient (in kg).
+     */
+    @NotNull
+    @Column(name = "weight", nullable = false)
+    private Double weight;
+
+    /**
+     * The height of the Patient (in cm).
+     */
+    @NotNull
+    @Column(name = "height", nullable = false)
+    private Double height;
+
+    /**
+     * The arterial pressure of the Patient.
+     */
+    @Column(name = "arterial_pressure")
+    private String arterialPressure;
+
+    /**
+     * The heart rate of the Patient.
+     */
+    @Column(name = "heart_rate")
+    private Integer heartRate;
+
+    /**
+     * The medical history of the Patient.
+     */
+    @Column(name = "medical_history")
+    private String medicalHistory;
+
+    /**
+     * The allergies of the Patient.
+     */
+    @Column(name = "allergies")
+    private String allergies;
+
+    /**
+     * The current medications of the Patient.
+     */
+    @Column(name = "current_medications")
+    private String currentMedications;
+
+    /**
+     * The diagnosis of the Patient.
+     */
+    @Column(name = "diagnosis")
+    private String diagnosis;
+
+    /**
+     * The treatment prescribed for the Patient.
+     */
+    @Column(name = "treatment")
+    private String treatment;
+
+    /**
+     * Additional observations for the Patient.
+     */
+    @Column(name = "observations")
+    private String observations;
 
     /**
      * The doctor assigned to the Patient.
