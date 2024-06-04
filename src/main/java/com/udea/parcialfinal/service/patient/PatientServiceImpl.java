@@ -33,8 +33,8 @@ public class PatientServiceImpl implements IPatientService {
      *
      * @param identification the identification number of the Patient
      * @return a ResponseEntity containing the Patient if found, or an appropriate HTTP status if not found
-     * @throws DataNotFoundException if the Patient with the specified identification number is not found
-     * @throws BusinessException if a data integrity violation or database access error occurs
+     * @throws DataNotFoundException    if the Patient with the specified identification number is not found
+     * @throws BusinessException        if a data integrity violation or database access error occurs
      * @throws IllegalArgumentException if the provided argument is invalid
      */
     @Override
@@ -58,5 +58,10 @@ public class PatientServiceImpl implements IPatientService {
             // Handle illegal argument exceptions
             throw new IllegalArgumentException("Invalid argument: " + e.getMessage(), e);
         }
+    }
+
+    @Override
+    public Patient savePatient(Patient patient) {
+        return patientRepository.save(patient);
     }
 }

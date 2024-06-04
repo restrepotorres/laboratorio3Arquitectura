@@ -14,5 +14,7 @@ public interface IPatientService {
      * @param identification the identification number of the Patient.
      * @return a ResponseEntity containing the Patient if found, or an appropriate HTTP status if not found.
      */
-    public ResponseEntity<Patient> getPatientByIdentificationNumber(String identification);
+    ResponseEntity<Patient> getPatientByIdentificationNumber(String identification);
+
+    Patient savePatient(Patient patient);
 }

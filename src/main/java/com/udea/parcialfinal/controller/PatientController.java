@@ -62,4 +62,10 @@ public class PatientController {
             @Parameter(description = "The identification number of the patient to retrieve", example = "123")
             @PathVariable String patientIdentificationNumber
     ) { return this.patientService.getPatientByIdentificationNumber(patientIdentificationNumber); }
+
+
+    @PostMapping(value = "/save", produces = "application/vnd.patient.v1+json")
+        public Patient savePatient(@RequestBody Patient patient) {
+        return patientService.savePatient(patient);
+    }
 }
