@@ -83,48 +83,56 @@ public class Patient {
     /**
      * The arterial pressure of the Patient.
      */
+    @NotNull
     @Column(name = "arterial_pressure")
     private String arterialPressure;
 
     /**
      * The heart rate of the Patient.
      */
+    @NotNull
     @Column(name = "heart_rate")
     private Integer heartRate;
 
     /**
      * The medical history of the Patient.
      */
+    @NotNull
     @Column(name = "medical_history")
     private String medicalHistory;
 
     /**
      * The allergies of the Patient.
      */
+    @NotNull
     @Column(name = "allergies")
     private String allergies;
 
     /**
      * The current medications of the Patient.
      */
+    @NotNull
     @Column(name = "current_medications")
     private String currentMedications;
 
     /**
      * The diagnosis of the Patient.
      */
+    @NotNull
     @Column(name = "diagnosis")
     private String diagnosis;
 
     /**
      * The treatment prescribed for the Patient.
      */
+    @NotNull
     @Column(name = "treatment")
     private String treatment;
 
     /**
      * Additional observations for the Patient.
      */
+    @NotNull
     @Column(name = "observations")
     private String observations;
 
@@ -132,7 +140,7 @@ public class Patient {
      * The doctor assigned to the Patient.
      * This establishes a many-to-one relationship with the Doctor entity.
      */
-
+    
     @Column (name = "doctor_id")
     private int idDoctor;
 
