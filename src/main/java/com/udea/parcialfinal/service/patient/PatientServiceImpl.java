@@ -7,6 +7,7 @@ import com.udea.parcialfinal.utils.exception.DataNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -60,8 +61,35 @@ public class PatientServiceImpl implements IPatientService {
         }
     }
 
+    /**
+     * Saves a new Patient.
+     *
+     * @param patient the Patient object to be saved
+     * @return a ResponseEntity containing the saved Patient
+     * @throws BusinessException        if a data integrity violation or database access error occurs
+     * @throws IllegalArgumentException if the provided argument is invalid
+     */
     @Override
-    public Patient savePatient(Patient patient) {
-        return patientRepository.save(patient);
+    public ResponseEntity<Patient> savePatient(Patient patient) {
+        try {
+            Optional<Patient> optionalPatient = patientRepository.findByIdentificationNumber(patient.getIdentificationNumber());
+            if (optionalPatient.isPresent()) {
+                // Patient already exists, return a 409 Conflict response
+                return ResponseEntity.status(HttpStatus.CONFLICT).build();
+            } else {
+                // Save the new patient
+                Patient savedPatient = patientRepository.save(patient);
+                return  new ResponseEntity<>(savedPatient, HttpStatus.CREATED);
+            }
+        } catch (DataIntegrityViolationException e) {
+            // Handle data integrity violations
+            throw new BusinessException("Data integrity violation");
+        } catch (DataAccessException e) {
+            // Handle database access errors
+            throw new BusinessException("Database error");
+        } catch (IllegalArgumentException e) {
+            // Handle illegal argument exceptions
+            throw new IllegalArgumentException("Invalid argument: " + e.getMessage(), e);
+        }
     }
 }

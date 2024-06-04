@@ -16,5 +16,11 @@ public interface IPatientService {
      */
     ResponseEntity<Patient> getPatientByIdentificationNumber(String identification);
 
-    Patient savePatient(Patient patient);
+    /**
+     * Saves a new Patient.
+     *
+     * @param patient the Patient object to be saved.
+     * @return a ResponseEntity containing the saved Patient.
+     */
+    ResponseEntity<Patient> savePatient(Patient patient);
 }

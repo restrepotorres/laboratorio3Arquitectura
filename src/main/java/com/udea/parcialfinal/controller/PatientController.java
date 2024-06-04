@@ -52,7 +52,7 @@ public class PatientController {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = Patient.class)) }),
             @ApiResponse(responseCode = "400", description = "Bad Request", content = {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = StandardResponse.class)) }),
-            @ApiResponse(responseCode = "404", description = "Boarding pass not found", content = {
+            @ApiResponse(responseCode = "404", description = "Patient not found", content = {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = StandardResponse.class)) }),
             @ApiResponse(responseCode = "500", description = "Internal server error", content = {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = RuntimeException.class)) })
@@ -64,8 +64,25 @@ public class PatientController {
     ) { return this.patientService.getPatientByIdentificationNumber(patientIdentificationNumber); }
 
 
+    /**
+     * Creates a new patient.
+     *
+     * @param patient the patient object to be created
+     * @return the created patient
+     */
+    @Operation(summary = "Create a patient")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Created patient", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = Patient.class)) }),
+            @ApiResponse(responseCode = "400", description = "Bad Request", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = StandardResponse.class)) }),
+            @ApiResponse(responseCode = "404", description = "Patient not found", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = StandardResponse.class)) }),
+            @ApiResponse(responseCode = "500", description = "Internal server error", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = RuntimeException.class)) })
+    })
     @PostMapping(value = "/save", produces = "application/vnd.patient.v1+json")
-        public Patient savePatient(@RequestBody Patient patient) {
-        return patientService.savePatient(patient);
-    }
+        public ResponseEntity<Patient> savePatient(
+                @RequestBody Patient patient
+    ) { return patientService.savePatient(patient); }
 }
